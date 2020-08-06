@@ -246,6 +246,15 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
 
 }
 
+var addonref = firebase.database().ref().child("location");
+ addonref.on("value", function(snapshot) {
+
+     snapshot.forEach(function(childsnapshot){
+        alert(item.longitude);
+
+    });
+
+  });
 </script>
 </body>
 <button onclick="add_location()">Add all locations from database</button>

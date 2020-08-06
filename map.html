@@ -25,7 +25,7 @@
 
 
 <script>
-  var user_lat, user_lng;
+var user_lat, user_lng;
 var x = document.getElementById("demo");
 
 function getLocation() {
@@ -34,6 +34,7 @@ function getLocation() {
   } else { 
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
+
 }
 
 function showPosition(position) {
@@ -229,6 +230,8 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
   
   function add_location(){
 
+    map.removeObjects(map.getObjects());
+
     function add_loc(h){
           firebase.database().ref('location/' + h.user_id).set(h);
         }
@@ -254,7 +257,7 @@ var addonref = firebase.database().ref().child("location");
 
      snapshot.forEach(function(childsnapshot){
         var item = childsnapshot.val();
-       
+        
         var userPosition = {lat: item.latitude , lng: item.longitude };
         var userIcon = new H.map.Icon('robot.png');
         let userMarker = new H.map.Marker(userPosition, {icon: userIcon});

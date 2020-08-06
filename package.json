@@ -1,0 +1,23 @@
+{
+  "name": "covid-tracking",
+  "version": "1.0.0",
+  "description": "live tracking test for CareQuest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pjflux2001/covid-tracking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pjflux2001/covid-tracking/issues"
+  },
+  "homepage": "https://github.com/pjflux2001/covid-tracking#readme",
+  "dependencies": {
+    "geolocation-utils": "^1.2.3"
+  },
+  "type": "module"
+}

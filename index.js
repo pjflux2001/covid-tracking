@@ -24,6 +24,7 @@ function codeverify() {
     var code=document.getElementById('verificationCode').value;
     coderesult.confirm(code).then(function (result) {
         alert("Successfully registered");
+        location.replace("map.html");
         var user=result.user;
         console.log(user);
     }).catch(function (error) {

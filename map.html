@@ -262,7 +262,7 @@ var addonref = firebase.database().ref().child("location");
         var userIcon = new H.map.Icon('robot.png');
         let userMarker = new H.map.Marker(userPosition, {icon: userIcon});
         map.addObject(userMarker);
-
+	userMarker.setData(firebase.auth().currentUser.phoneNumber);
         
     });
 

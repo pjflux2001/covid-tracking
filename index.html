@@ -4,6 +4,41 @@
 	<title>covid tracking</title>
 </head>
 <body>
-test
+Enter phone number
+	<form>
+		<input type="text" id="number" placeholder="+91**********">
+		<div id="recaptcha">
+
+		</div>
+		<button type="button" onclick="phoneAuth();">Send Code</button>
+	</form><br>
+	<h1>Enter Verification code</h1>
+	<form>
+		<input type="text" id="verificationCode" placeholder="code please">
+		<button type="button" onclick="verifyCode();">Verify</button>
+	</form>
+	<script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyChax-RIyl8an4nKJA0XLdIc8CyU3jeGgY",
+    authDomain: "here-maps-bitsians.firebaseapp.com",
+    databaseURL: "https://here-maps-bitsians.firebaseio.com",
+    projectId: "here-maps-bitsians",
+    storageBucket: "here-maps-bitsians.appspot.com",
+    messagingSenderId: "517005193635",
+    appId: "1:517005193635:web:846d53aebc789427b0ea16"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+	</script>
+	<script src="index.js"></script>
 </body>
 </html>

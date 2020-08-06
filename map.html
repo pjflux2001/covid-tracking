@@ -251,8 +251,7 @@ var addonref = firebase.database().ref().child("location");
 
      snapshot.forEach(function(childsnapshot){
         var item = childsnapshot.val();
-        alert(item.longitude);
-        
+       
         var userPosition = {lat: item.latitude , lng: item.longitude };
         var userIcon = new H.map.Icon('robot.png');
         let userMarker = new H.map.Marker(userPosition, {icon: userIcon});

@@ -25,6 +25,7 @@
 
 
 <script>
+  var user_lat, user_lng;
 var x = document.getElementById("demo");
 
 function getLocation() {
@@ -38,6 +39,8 @@ function getLocation() {
 function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude + 
   "<br>Longitude: " + position.coords.longitude;
+  user_lat = position.coords.latitude;
+  user_lng = position.coords.longitude;
 }
 </script>
 
@@ -45,7 +48,7 @@ function showPosition(position) {
 
 
 <script>
-  var user_lat, user_lng;
+  
   var platform = new H.service.Platform({
   'apikey': 'JP-gD6e4WWDbixevPMBGqYnruBv8wo_QO6h6a-aIErI'
 });
@@ -94,8 +97,8 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
             if(navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => {
                     console.log(position.coords);
-                    user_lng = position.coords.longitude;
-                    user_lat = position.coords.latitude;
+                    //user_lng = position.coords.longitude;
+                    //user_lat = position.coords.latitude;
                     var browserPosition = {lat: position.coords.latitude , lng: position.coords.longitude };
                     // Create a marker:
                     var icon = new H.map.Icon('gps.png');
@@ -256,6 +259,7 @@ var addonref = firebase.database().ref().child("location");
         var userIcon = new H.map.Icon('robot.png');
         let userMarker = new H.map.Marker(userPosition, {icon: userIcon});
         map.addObject(userMarker);
+
         
     });
 

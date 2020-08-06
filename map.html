@@ -253,7 +253,7 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
 }
 
 var addonref = firebase.database().ref().child("location");
-	map.removeObjects(map.getObjects());
+	// map.removeObjects(map.getObjects());
  addonref.on("value", function(snapshot) {
 	
      snapshot.forEach(function(childsnapshot){

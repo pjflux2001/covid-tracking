@@ -45,6 +45,7 @@ function showPosition(position) {
 
 
 <script>
+  var user_lat, user_lng;
   var platform = new H.service.Platform({
   'apikey': 'JP-gD6e4WWDbixevPMBGqYnruBv8wo_QO6h6a-aIErI'
 });
@@ -93,6 +94,8 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
             if(navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => {
                     console.log(position.coords);
+                    user_lng = position.coords.longitude;
+                    user_lat = position.coords.latitude;
                     var browserPosition = {lat: position.coords.latitude , lng: position.coords.longitude };
                     // Create a marker:
                     var icon = new H.map.Icon('gps.png');
@@ -228,16 +231,14 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
         }
 
 
-
-    navigator.geolocation.getCurrentPosition(position => {
         var location = {
       user_id: firebase.auth().currentUser.uid,
       mob: firebase.auth().currentUser.phoneNumber,
       time: new Date().toLocaleString(),
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
+      latitude: user_lat,
+      longitude: user_lng
             };
-      });
+      console.log(user_lat + " @ "+ user_lng);
     
 
       

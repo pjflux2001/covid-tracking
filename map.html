@@ -230,7 +230,7 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
   
   function add_location(){
 
-    map.removeObjects(map.getObjects());
+    
 
     function add_loc(h){
           firebase.database().ref('location/' + h.user_id).set(h);
@@ -253,8 +253,9 @@ var ui = H.ui.UI.createDefault(map, defaultLayers,'en-US');
 }
 
 var addonref = firebase.database().ref().child("location");
+	map.removeObjects(map.getObjects());
  addonref.on("value", function(snapshot) {
-
+	
      snapshot.forEach(function(childsnapshot){
         var item = childsnapshot.val();
         

@@ -250,6 +250,7 @@ var addonref = firebase.database().ref().child("location");
  addonref.on("value", function(snapshot) {
 
      snapshot.forEach(function(childsnapshot){
+        var item = childsnapshot.val();
         alert(item.longitude);
 
     });

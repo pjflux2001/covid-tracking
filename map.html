@@ -258,18 +258,18 @@
 	    map.removeObjects(map.getObjects());
       snapshot.forEach(function(childsnapshot){
         var item = childsnapshot.val();
-        //map.removeObjects();
+
         var userPosition = {lat: item.latitude , lng: item.longitude };
         console.log(userPosition);
 
-        var checkUser = ((user_lat.toFixed(3)) == (item.latitude.toFixed(3)) && (user_lng.toFixed(3)) == (item.longitude.toFixed(3)));
+        var checkUser = ((user_lat.toFixed(2)) == (item.latitude.toFixed(2)) && (user_lng.toFixed(2)) == (item.longitude.toFixed(2)));
 
         var userIcon = (checkUser) ? (new H.map.Icon('./icons/icons8-standing-man-48.png')) : (new H.map.Icon('./icons/icons8-man-50 (1).png'));
-        map.addObject(circle); // adding green circle around user
         console.log(checkUser);
 
         let userMarker = new H.map.Marker(userPosition, {icon: userIcon});
         map.addObject(userMarker);
+        map.addObject(circle); // adding green circle around user
 	      userMarker.setData(firebase.auth().currentUser.phoneNumber);  
     });
 

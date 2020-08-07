@@ -16,24 +16,23 @@
   
   <p>Click the button to get your coordinates.</p>
 
-  <button onclick="getLocation()">Try It</button>
-
-
-  <p id="demo"></p>
-
+  <div>
+    <h5><b>This is your Position Coordinates :</b></h5>
+    <p id="demo">Please wait ...</p><br><br>
+  </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++-->
   <script>
     var user_lat, user_lng;
     var x = document.getElementById("demo");
 
-    function getLocation() {
+    (function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
       } 
       else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
       }
-    }
+    })();
 
     function showPosition(position) {
       x.innerHTML = "Latitude: " + position.coords.latitude + 
@@ -99,6 +98,7 @@
         
         //let imgIcon = new H.map.Icon('./icons/icons8-standing-man-48.png');
 
+        var circle;
         function getBrowserPosition(){
             if(navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => {
@@ -112,7 +112,7 @@
                     let marker = new H.map.Marker(browserPosition, {icon: icon});
 
                     // Instantiate a circle object (using the default style):
-                    var circle = new H.map.Circle({lat: position.coords.latitude + 0.015, lng: position.coords.longitude }, 10000, {style: circleStyle});
+                    circle = new H.map.Circle({lat: position.coords.latitude + 0.015, lng: position.coords.longitude }, 10000, {style: circleStyle});
                     marker.setData("You're here!");
                     
                     // Add the circle to the map:
@@ -250,6 +250,7 @@
 
       add_loc(location);
     }
+    
 
     var addonref = firebase.database().ref().child("location");
 
@@ -257,10 +258,16 @@
 	    map.removeObjects(map.getObjects());
       snapshot.forEach(function(childsnapshot){
         var item = childsnapshot.val();
-        
+        //map.removeObjects();
         var userPosition = {lat: item.latitude , lng: item.longitude };
-        //var userIcon = (user_lat != item.latitude || user_lng != item.longitude) ? new H.map.Icon('./icons/icons8-man-50 (1).png') : new H.map.Icon('./icons/icons8-standing-man-48.png')
-        var userIcon = new H.map.Icon('./icons/icons8-standing-man-48.png');
+        console.log(userPosition);
+
+        var checkUser = ((user_lat.toFixed(3)) == (item.latitude.toFixed(3)) && (user_lng.toFixed(3)) == (item.longitude.toFixed(3)));
+
+        var userIcon = (checkUser) ? (new H.map.Icon('./icons/icons8-standing-man-48.png')) : (new H.map.Icon('./icons/icons8-man-50 (1).png'));
+        map.addObject(circle); // adding green circle around user
+        console.log(checkUser);
+
         let userMarker = new H.map.Marker(userPosition, {icon: userIcon});
         map.addObject(userMarker);
 	      userMarker.setData(firebase.auth().currentUser.phoneNumber);  
@@ -270,7 +277,7 @@
 
 </script>
 
-  <button onclick="add_location()">Add all locations from database</button> 
+  <button onclick="add_location()">Add all locations from database</button>
 
   </body>
 </html>

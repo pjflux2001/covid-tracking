@@ -37,7 +37,7 @@
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
   <script>
-    // Your web app's Firebase configuration
+    /*Your web app's Firebase configuration*/
     var firebaseConfig = {
     apiKey: "AIzaSyChax-RIyl8an4nKJA0XLdIc8CyU3jeGgY",
     authDomain: "here-maps-bitsians.firebaseapp.com",
@@ -50,37 +50,23 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   
-    function add_location(){
-      function add_loc(h){
-          firebase.database().ref('location/' + h.user_id).set(h);
-      }
-
-      var location = {
-        user_id: firebase.auth().currentUser.uid,
-        mob: firebase.auth().currentUser.phoneNumber,
-        time: new Date().toLocaleString(),
-        latitude: user_lat,
-        longitude: user_lng
-      };
-
-      console.log(user_lat + " @ "+ user_lng);
-
-      add_loc(location);
-    }
     
-
     var addonref = firebase.database().ref().child("location");
 
     addonref.on("value", function(snapshot) {
-	    map.removeObjects(map.getObjects());
+
+      var currentUserPhoneNumber = firebase.auth().currentUser.phoneNumber;
+      
+      map.removeObjects(map.getObjects());
+      
       snapshot.forEach(function(childsnapshot){
         var item = childsnapshot.val();
 
         var userPosition = {lat: item.latitude , lng: item.longitude };
         console.log(userPosition);
 
-        var checkUser = ((user_lat.toFixed(2)) == (item.latitude.toFixed(2)) && (user_lng.toFixed(2)) == (item.longitude.toFixed(2)));
-
+        //var checkUser = ((user_lat.toFixed(2)) == (item.latitude.toFixed(2)) && (user_lng.toFixed(2)) == (item.longitude.toFixed(2)));
+        var checkUser = (currentUserPhoneNumber == item.mob);
         var userIcon = (checkUser) ? (new H.map.Icon('./icons/icons8-standing-man-48.png')) : (new H.map.Icon('./icons/icons8-man-50 (1).png'));
         console.log(checkUser);
 

@@ -1,4 +1,4 @@
-
+/*===============gelocation start====================*/
     var user_lat, user_lng;
     var x = document.getElementById("demo");
 
@@ -17,8 +17,9 @@
       user_lat = position.coords.latitude;
       user_lng = position.coords.longitude;
     }
-  
+/*===============gelocation end====================*/
 
+/*===============here map start====================*/
     var platform = new H.service.Platform({
       'apikey': 'JP-gD6e4WWDbixevPMBGqYnruBv8wo_QO6h6a-aIErI'
     });
@@ -106,7 +107,8 @@
             opacity: 0.5
   
         };
-        
+/*===============Here maps end====================*/    
+
 /*=========================== Markers : No use ==================================*/ 
 
         function clickToMark(){
@@ -178,4 +180,24 @@
         clickToMark();
         clickDragMarkers();
 /*=============================================================*/ 
+
+/*===========================adding locations to database - start==================================*/ 
+function add_location(){
+    function add_loc(h){
+        firebase.database().ref('location/' + h.user_id).set(h);
+    }
+
+    var location = {
+      user_id: firebase.auth().currentUser.uid,
+      mob: firebase.auth().currentUser.phoneNumber,
+      time: new Date().toLocaleString(),
+      latitude: user_lat,
+      longitude: user_lng
+    };
+
+    console.log(user_lat + " @ "+ user_lng);
+
+    add_loc(location);
+  }
+/*===========================adding locations to database - end==================================*/ 
 
